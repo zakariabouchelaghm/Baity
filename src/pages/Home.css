@@ -108,6 +108,14 @@
     border: 2px solid transparent;
 }
 
+.service-icon img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    margin-bottom: 15px;
+    display: block;
+}
+
 .service-card::before {
     content: '';
     position: absolute;
@@ -135,6 +143,10 @@
     margin-bottom: var(--spacing-md);
     position: relative;
     z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 .service-title {

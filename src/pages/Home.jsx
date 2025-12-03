@@ -20,43 +20,43 @@ const Home = () => {
         {
             title: 'ديكوراتي',
             description: 'تصميم داخلي فاخر يعكس ذوقك الرفيع',
-            icon: '🏠',
+            image: '/services/decorations.png',
             link: '/decorations'
         },
         {
             title: 'استشاراتي',
             description: 'استشارات هندسية متخصصة من خبراء المجال',
-            icon: '📋',
+            image: '/services/consultations.png',
             link: '/consultations'
         },
         {
             title: 'حديقتي',
             description: 'تصميم حدائق خلابة تضفي جمالاً على منزلك',
-            icon: '🌳',
+            image: '/services/garden.png',
             link: '/garden'
         },
         {
             title: 'موقعي',
             description: 'تخطيط وتصميم مواقع احترافية',
-            icon: '📍',
+            image: '/services/location.png',
             link: '/location'
         },
         {
             title: 'تجديد',
             description: 'تجديد شامل يمنح مساحتك حياة جديدة',
-            icon: '🔨',
+            image: '/services/renovation.png',
             link: '/renovation'
         },
         {
             title: 'دورات',
             description: 'دورات تدريبية متخصصة في التصميم والهندسة',
-            icon: '📚',
+            image: '/services/courses.png',
             link: '/courses'
         },
         {
             title: 'خدمات أخرى',
             description: 'خدمات إضافية لتلبية جميع احتياجاتك',
-            icon: '⚙️',
+            image: '/services/other-services.png',
             link: '/other-services'
         }
     ]
@@ -99,7 +99,7 @@ const Home = () => {
                                 className="service-card"
                                 style={{ animationDelay: `${index * 0.1}s` }}
                             >
-                                <div className="service-icon">{service.icon}</div>
+                                <div className="service-icon"><img src={service.image} alt={service.title} /></div>
                                 <h3 className="service-title">{service.title}</h3>
                                 <p className="service-description">{service.description}</p>
                                 <div className="service-footer">
