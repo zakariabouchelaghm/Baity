@@ -1,49 +1,72 @@
-import { useState } from 'react'
-import OfferCard from '../components/OfferCard'
-import PaymentModal from '../components/PaymentModal'
-import { offersData } from '../data/offers'
+import { Link } from 'react-router-dom'
 import './SectionPage.css'
 
 const Consultations = () => {
-    const [selectedOffer, setSelectedOffer] = useState(null)
-    const offers = offersData.consultations
+    const consultationSections = [
+        {
+            id: 1,
+            title: 'صمم بيتك من الصفر',
+            description: 'ابدأ رحلة تصميم منزل أحلامك من البداية مع فريقنا المحترف',
+            link: '/design-from-scratch',
+            icon: '🏗️'
+        },
+        {
+            id: 2,
+            title: 'تصميمات',
+            description: 'تصميمات داخلية مبتكرة تناسب جميع الأذواق والمساحات',
+            link: '/designs',
+            icon: '🎨'
+        },
+        {
+            id: 3,
+            title: 'تعديلات',
+            description: 'تعديلات وتحسينات على التصميمات الحالية لتحقيق رؤيتك',
+            link: '/modifications',
+            icon: '✏️'
+        },
+        {
+            id: 4,
+            title: 'استشارات',
+            description: 'استشارات متخصصة في التصميم الداخلي من خبرائنا',
+            link: '/consultations-page',
+            icon: '💡'
+        }
+    ]
 
     return (
         <div className="section-page">
             <div className="page-hero">
                 <div className="page-hero-overlay"></div>
                 <div className="container">
-                    <h1 className="page-title">استشاراتي</h1>
+                    <h1 className="page-title">خدمات الاستشارات</h1>
                     <p className="page-subtitle">
-                        استشارات هندسية متخصصة من خبراء المجال لضمان نجاح مشروعك
+                        اختر الخدمة المناسبة لك من بين خدماتنا المتنوعة
                     </p>
                 </div>
             </div>
 
             <section className="offers-section">
                 <div className="container">
-                    <h2 className="section-title">باقات الاستشارات الهندسية</h2>
+                    <h2 className="section-title">أقسام الخدمات</h2>
                     <p className="section-description">
-                        احصل على استشارة هندسية احترافية تساعدك في اتخاذ القرارات الصحيحة
+                        استكشف خدماتنا المتخصصة في التصميم الداخلي
                     </p>
-                    <div className="offers-grid">
-                        {offers.map((offer) => (
-                            <OfferCard
-                                key={offer.id}
-                                offer={offer}
-                                onOrderClick={setSelectedOffer}
-                            />
+                    <div className="consultation-sections-grid">
+                        {consultationSections.map((section) => (
+                            <Link
+                                key={section.id}
+                                to={section.link}
+                                className="consultation-section-card"
+                            >
+                                <div className="section-icon">{section.icon}</div>
+                                <h3 className="section-card-title">{section.title}</h3>
+                                <p className="section-card-description">{section.description}</p>
+                                <span className="section-card-arrow">←</span>
+                            </Link>
                         ))}
                     </div>
                 </div>
             </section>
-
-            {selectedOffer && (
-                <PaymentModal
-                    offer={selectedOffer}
-                    onClose={() => setSelectedOffer(null)}
-                />
-            )}
         </div>
     )
 }

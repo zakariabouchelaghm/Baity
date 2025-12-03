@@ -1,12 +1,27 @@
 import { useState } from 'react'
 import OfferCard from '../components/OfferCard'
 import PaymentModal from '../components/PaymentModal'
-import { offersData } from '../data/offers'
 import './SectionPage.css'
 
 const Decorations = () => {
     const [selectedOffer, setSelectedOffer] = useState(null)
-    const offers = offersData.decorations
+
+    const offers = [
+        {
+            id: 'decoration-1',
+            title: 'صمم موود بورد و صورة ثلاثية الأبعاد مع التفاصيل',
+            description: 'احصل على تصميم موود بورد احترافي وصورة ثلاثية الأبعاد مفصلة لمشروعك',
+            price: '500.00',
+            currency: 'AED',
+            notice: 'تبدأ من',
+            image: '/services/decorations.png',
+            features: [
+                'موود بورد احترافي',
+                'صورة ثلاثية الأبعاد عالية الجودة',
+                'تفاصيل كاملة للتصميم'
+            ]
+        }
+    ]
 
     return (
         <div className="section-page">
@@ -22,9 +37,9 @@ const Decorations = () => {
 
             <section className="offers-section">
                 <div className="container">
-                    <h2 className="section-title">باقات التصميم الداخلي</h2>
+                    <h2 className="section-title">عرض خاص</h2>
                     <p className="section-description">
-                        اختر الباقة المناسبة لك واحصل على تصميم داخلي احترافي يلبي جميع احتياجاتك
+                        احصل على تصميم احترافي متكامل بسعر مميز
                     </p>
                     <div className="offers-grid">
                         {offers.map((offer) => (
@@ -32,6 +47,7 @@ const Decorations = () => {
                                 key={offer.id}
                                 offer={offer}
                                 onOrderClick={setSelectedOffer}
+                                buttonText="add+"
                             />
                         ))}
                     </div>

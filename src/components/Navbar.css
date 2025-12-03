@@ -10,9 +10,11 @@
 
 .navbar-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     padding: 1rem var(--spacing-md);
+    position: relative;
+    gap: 2rem;
 }
 
 .navbar-logo {
@@ -78,6 +80,22 @@
     transition: all var(--transition-fast);
 }
 
+.navbar-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.navbar-toggle span {
+    width: 30px;
+    height: 3px;
+    background-color: var(--primary);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
 .navbar-toggle.active span:nth-child(1) {
     transform: rotate(45deg) translate(8px, 8px);
 }
@@ -93,22 +111,31 @@
 @media (max-width: 1024px) {
     .navbar-toggle {
         display: flex;
+        z-index: 1003;
+        position: relative;
     }
 
     .navbar-menu {
         position: absolute;
         top: 100%;
-        right: 0;
         left: 0;
+        right: 0;
+        width: 100%;
+        height: auto;
+        max-width: none;
         flex-direction: column;
         background: white;
-        box-shadow: var(--shadow-lg);
-        padding: var(--spacing-md);
-        gap: 0.5rem;
-        transform: translateY(-100%);
+        padding: 1.5rem;
+        gap: 1rem;
+        transform: translateY(-1rem);
         opacity: 0;
         pointer-events: none;
-        transition: all var(--transition-normal);
+        transition: all 0.3s ease-in-out;
+        z-index: 999;
+        display: flex;
+        justify-content: flex-start;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        border-top: 1px solid var(--border);
     }
 
     .navbar-menu.active {
@@ -120,11 +147,16 @@
     .navbar-link {
         width: 100%;
         text-align: center;
-        padding: 1rem;
+        padding: 1rem 0;
+        font-size: 1.25rem;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .navbar-link:last-child {
+        border-bottom: none;
     }
 
     .navbar-link::after {
-        right: 1rem;
-        left: 1rem;
+        display: none;
     }
 }

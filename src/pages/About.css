@@ -1,0 +1,155 @@
+.about-page {
+    padding-bottom: 4rem;
+}
+
+.about-header {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/services/consultations.png');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 6rem 0;
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.about-title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-family: var(--font-primary);
+}
+
+.about-subtitle {
+    font-size: 1.5rem;
+    opacity: 0.9;
+}
+
+.about-content {
+    max-width: 900px;
+}
+
+.about-section {
+    margin-bottom: 4rem;
+    background: white;
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.about-section h2 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.about-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 60px;
+    height: 3px;
+    background: var(--accent);
+}
+
+.about-section p {
+    line-height: 1.8;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.services-list .service-item {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #eee;
+}
+
+.services-list .service-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.service-item h3 {
+    color: var(--text-primary);
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+}
+
+.conclusion {
+    background: var(--gradient-primary);
+    color: white;
+}
+
+.conclusion h2 {
+    color: white;
+}
+
+.conclusion h2::after {
+    background: white;
+}
+
+.conclusion p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+@media (max-width: 768px) {
+    .about-title {
+        font-size: 2.5rem;
+    }
+
+    .about-section {
+        padding: 1.5rem;
+    }
+}
+/* Showcase Section in About Page */
+.showcase-section {
+    background: var(--bg-secondary) !important;
+}
+
+.showcase-intro {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.showcase-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    aspect-ratio: 4/3;
+    background: var(--bg-primary);
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-normal);
+}
+
+.showcase-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-normal);
+}
+
+.showcase-item:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+}
+
+.showcase-item:hover img {
+    transform: scale(1.1);
+}
+
+.showcase-cta {
+    text-align: center;
+    margin-top: 2rem;
+}

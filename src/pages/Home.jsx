@@ -37,7 +37,7 @@ const Home = () => {
         },
         {
             title: 'موقعي',
-            description: 'تخطيط وتصميم مواقع احترافية',
+            description: "استشارات وزيارات ميدانية للديكور والتشطيب",
             image: '/services/location.png',
             link: '/location'
         },
@@ -68,7 +68,7 @@ const Home = () => {
                 <div className="hero-overlay"></div>
                 <div className="container hero-content">
                     <h1 className="hero-title fade-in">
-                        مرحباً بك في <span className="highlight">بيتي</span>
+                        <img src="/logo.png" alt="Baity Logo" className="hero-logo" style={{ maxWidth: '350px', height: 'auto' }} />
                     </h1>
                     <p className="hero-subtitle fade-in">
                         منصتك المتكاملة للهندسة المعمارية والتصميم الداخلي
@@ -80,6 +80,9 @@ const Home = () => {
                         <Link to="/consultations" className="btn btn-outline">
                             احجز استشارة
                         </Link>
+                        <a href="#footer" className="btn btn-accent" style={{ backgroundColor: '#d4af37', color: 'white', border: 'none' }}>
+                            اتصل بنا
+                        </a>
                     </div>
                 </div>
             </section>
@@ -131,6 +134,39 @@ const Home = () => {
                 </div>
             </section>
 
+            {/* Showcase Section - أعمالنا */}
+            <section className="showcase">
+                <div className="container">
+                    <h2 className="section-title">أعمالنا</h2>
+                    <p className="section-subtitle">
+                        اطلع على مجموعة من أفضل مشاريعنا وتصاميمنا المنجزة
+                    </p>
+                    <div className="showcase-grid">
+                        {[
+                            'GF-101-Sitting-01.jpg',
+                            'FF-Hall-05.jpg',
+                            'GF-106-Master-Bedroom-02.jpg',
+                            'Hall-01.jpg',
+                            'EXT-01.jpg',
+                            'GF-105-Family-Living-03.jpg'
+                        ].map((image, index) => (
+                            <div key={index} className="showcase-item">
+                                <img
+                                    src={`/showcase/${image}`}
+                                    alt={`مشروع ${index + 1}`}
+                                    loading="lazy"
+                                />
+                            </div>
+                        ))}
+                    </div>
+                    <div className="showcase-cta">
+                        <Link to="/portfolio" className="btn btn-primary">
+                            عرض جميع الأعمال
+                        </Link>
+                    </div>
+                </div>
+            </section>
+
             {/* Modern Design Section */}
             <section className="modern-design">
                 <div className="container">
@@ -156,10 +192,10 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* Why Choose Us Section */}
-            <section className="why-us">
+            < section className="why-us" >
                 <div className="container">
                     <h2 className="section-title">لماذا تختار بيتي؟</h2>
                     <div className="features-grid">
@@ -185,10 +221,10 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* CTA Section */}
-            <section className="cta">
+            < section className="cta" >
                 <div className="container">
                     <div className="cta-content">
                         <h2>هل أنت مستعد لتحويل حلمك إلى واقع؟</h2>
@@ -198,16 +234,18 @@ const Home = () => {
                         </Link>
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* Payment Modal */}
-            {selectedOffer && (
-                <PaymentModal
-                    offer={selectedOffer}
-                    onClose={() => setSelectedOffer(null)}
-                />
-            )}
-        </div>
+            {
+                selectedOffer && (
+                    <PaymentModal
+                        offer={selectedOffer}
+                        onClose={() => setSelectedOffer(null)}
+                    />
+                )
+            }
+        </div >
     )
 }
 

@@ -89,3 +89,72 @@
         grid-template-columns: 1fr;
     }
 }
+/* No offers message */
+.no-offers {
+    text-align: center;
+    padding: 3rem;
+    font-size: 1.3rem;
+    color: var(--text-secondary);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    grid-column: 1 / -1;
+}
+
+/* Consultation sections grid */
+.consultation-sections-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.consultation-section-card {
+    background: white;
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-normal);
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    border: 2px solid transparent;
+}
+
+.consultation-section-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--primary);
+}
+
+.section-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.section-card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+    font-family: var(--font-secondary);
+}
+
+.section-card-description {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.section-card-arrow {
+    font-size: 1.5rem;
+    color: var(--primary);
+    transition: transform var(--transition-fast);
+}
+
+.consultation-section-card:hover .section-card-arrow {
+    transform: translateX(-8px);
+}

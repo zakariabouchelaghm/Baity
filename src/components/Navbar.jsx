@@ -16,18 +16,25 @@ const Navbar = () => {
     const isActive = (path) => location.pathname === path
 
     return (
-        <nav className="navbar">
+        <nav className={`navbar ${isOpen ? 'active' : ''}`}>
             <div className="container navbar-container">
-                <Link to="/" className="navbar-logo">
-                    <img src="/logoapp.png" alt="بيتي" className="logo-image" />
+                <Link to="/" className="navbar-logo" onClick={() => setIsOpen(false)}>
+                    {/* Logo removed as per request */}
                 </Link>
 
-                <ul className="navbar-menu">
+                <div className={`navbar-toggle ${isOpen ? 'active' : ''}`} onClick={() => setIsOpen(!isOpen)}>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <ul className={`navbar-menu ${isOpen ? 'active' : ''}`}>
                     {navLinks.map((link) => (
                         <li key={link.path}>
                             <Link
                                 to={link.path}
                                 className={`navbar-link ${isActive(link.path) ? 'active' : ''}`}
+                                onClick={() => setIsOpen(false)}
                             >
                                 {link.label}
                             </Link>
