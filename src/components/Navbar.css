@@ -39,6 +39,9 @@
     font-size: 1.1rem;
     position: relative;
     padding-bottom: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 
 /* Click Effect / Active State */
@@ -61,6 +64,77 @@
 .navbar-link:hover,
 .navbar-link.active {
     color: var(--primary);
+}
+
+/* Dropdown Menu Styles */
+.navbar-item-dropdown {
+    position: relative;
+}
+
+.navbar-link svg {
+    transition: transform 0.3s ease;
+}
+
+.navbar-item-dropdown:hover .navbar-link svg {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border-radius: var(--radius-md);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    min-width: 220px;
+    padding: 0.5rem 0;
+    margin-top: 0.5rem;
+    z-index: 1000;
+    animation: dropdownFadeIn 0.3s ease;
+}
+
+@keyframes dropdownFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdown-item {
+    display: block;
+    padding: 0.75rem 1.5rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.dropdown-item::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background: var(--primary);
+    transform: scaleY(0);
+    transition: transform 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background: var(--bg-secondary);
+    color: var(--primary);
+    padding-right: 1.75rem;
+}
+
+.dropdown-item:hover::before {
+    transform: scaleY(1);
 }
 
 /* Actions (Cart + Toggle) */
@@ -166,5 +240,19 @@
     .navbar-actions {
         margin-right: 0;
         margin-left: auto;
+    }
+
+    /* Mobile dropdown */
+    .dropdown-menu {
+        position: static;
+        box-shadow: none;
+        background: var(--bg-secondary);
+        margin-top: 0.5rem;
+        border-radius: var(--radius-sm);
+    }
+
+    .dropdown-item {
+        padding: 0.6rem 1rem;
+        font-size: 0.95rem;
     }
 }

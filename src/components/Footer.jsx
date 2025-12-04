@@ -11,7 +11,7 @@ const Footer = () => {
                     <div className="footer-section">
                         <h3 className="footer-title">بيتي</h3>
                         <p className="footer-description">
-                            منصتك المتكاملة للهندسة المعمارية والتصميم الداخلي في المملكة العربية السعودية
+                            منصتك المتكاملة للهندسة المعمارية والتصميم الداخلي
                         </p>
                         <div className="footer-social">
                             <a href="#" className="social-link" aria-label="Facebook">
@@ -41,7 +41,24 @@ const Footer = () => {
                         <h4 className="footer-section-title">روابط سريعة</h4>
                         <ul className="footer-links">
                             <li><Link to="/">الرئيسية</Link></li>
-                            <li><a href="#services">خدماتنا</a></li>
+                            <li><Link to="/about">من نحن</Link></li>
+                            <li>
+                                <a
+                                    href="#services"
+                                    onClick={(e) => {
+                                        e.preventDefault()
+                                        const servicesSection = document.getElementById('services')
+                                        if (servicesSection) {
+                                            servicesSection.scrollIntoView({ behavior: 'smooth' })
+                                        } else {
+                                            window.location.href = '/#services'
+                                        }
+                                    }}
+                                >
+                                    خدماتنا
+                                </a>
+                            </li>
+                            <li><Link to="/contact">اتصل بنا</Link></li>
                         </ul>
                     </div>
 
@@ -66,7 +83,7 @@ const Footer = () => {
                                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                                     <circle cx="12" cy="10" r="3" />
                                 </svg>
-                                <span>الرياض، المملكة العربية السعودية</span>
+                                <span>الإمارات العربية المتحدة</span>
                             </li>
                         </ul>
                     </div>
