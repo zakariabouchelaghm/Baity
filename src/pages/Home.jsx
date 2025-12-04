@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import OfferCard from '../components/OfferCard'
 import PaymentModal from '../components/PaymentModal'
@@ -8,6 +8,73 @@ import './Home.css'
 
 const Home = () => {
     const [selectedOffer, setSelectedOffer] = useState(null)
+
+    // Before/After Slider functionality
+    useEffect(() => {
+        const sliderHandle = document.getElementById('sliderHandle')
+        const afterImageContainer = document.getElementById('afterImageContainer')
+
+        if (!sliderHandle || !afterImageContainer) return
+
+        let isDragging = false
+        const container = sliderHandle.parentElement
+
+        const updateSlider = (clientX) => {
+            const rect = container.getBoundingClientRect()
+            let position = ((clientX - rect.left) / rect.width) * 100
+            position = Math.max(0, Math.min(100, position))
+
+            sliderHandle.style.left = `${position}%`
+            afterImageContainer.style.clipPath = `inset(0 ${100 - position}% 0 0)`
+        }
+
+        const handleMouseDown = (e) => {
+            isDragging = true
+            e.preventDefault()
+        }
+
+        const handleMouseMove = (e) => {
+            if (!isDragging) return
+            updateSlider(e.clientX)
+        }
+
+        const handleMouseUp = () => {
+            isDragging = false
+        }
+
+        const handleTouchStart = (e) => {
+            isDragging = true
+        }
+
+        const handleTouchMove = (e) => {
+            if (!isDragging) return
+            const touch = e.touches[0]
+            updateSlider(touch.clientX)
+        }
+
+        const handleTouchEnd = () => {
+            isDragging = false
+        }
+
+        // Mouse events
+        sliderHandle.addEventListener('mousedown', handleMouseDown)
+        document.addEventListener('mousemove', handleMouseMove)
+        document.addEventListener('mouseup', handleMouseUp)
+
+        // Touch events
+        sliderHandle.addEventListener('touchstart', handleTouchStart)
+        document.addEventListener('touchmove', handleTouchMove)
+        document.addEventListener('touchend', handleTouchEnd)
+
+        return () => {
+            sliderHandle.removeEventListener('mousedown', handleMouseDown)
+            document.removeEventListener('mousemove', handleMouseMove)
+            document.removeEventListener('mouseup', handleMouseUp)
+            sliderHandle.removeEventListener('touchstart', handleTouchStart)
+            document.removeEventListener('touchmove', handleTouchMove)
+            document.removeEventListener('touchend', handleTouchEnd)
+        }
+    }, [])
 
     // Get featured offers (first offer from each category)
     const featuredOffers = [
@@ -75,9 +142,9 @@ const Home = () => {
                         <Link to="/consultations" className="btn btn-outline">
                             احجز استشارة
                         </Link>
-                        <a href="#footer" className="btn btn-accent" style={{ backgroundColor: 'white', color: '#7F0621', border: 'none' }}>
+                        <Link to="/contact" className="btn btn-accent" style={{ backgroundColor: 'white', color: '#7F0621', border: 'none' }}>
                             اتصل بنا
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </section>
@@ -110,24 +177,7 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* Featured Offers Section */}
-            <section className="featured-offers">
-                <div className="container">
-                    <h2 className="section-title">عروض مميزة</h2>
-                    <p className="section-subtitle">
-                        اغتنم الفرصة واحصل على أفضل العروض لخدماتنا المتميزة
-                    </p>
-                    <div className="offers-grid">
-                        {featuredOffers.map((offer) => (
-                            <OfferCard
-                                key={offer.id}
-                                offer={offer}
-                                onOrderClick={setSelectedOffer}
-                            />
-                        ))}
-                    </div>
-                </div>
-            </section>
+
 
             {/* Vision Section - رؤيتنا */}
             <section className="vision-section" style={{
@@ -206,18 +256,41 @@ const Home = () => {
 
                         </div>
 
-                        <div className="modern-design-image-placeholder">
-                            <img
-                                src="public/showcase/3aaa1069-a4ac-42c2-8ef3-390cc3a56a3d.jpg"
-                                alt="تصميم عصري"
-                                style={{
-                                    width: '100%',
-                                    height: '500px',
-                                    borderRadius: 'var(--radius-lg)',
-                                    boxShadow: 'var(--shadow-xl)',
-                                    border: '4px solid #d4af37' // Gold border
-                                }}
-                            />
+                        <div className="before-after-container">
+                            <div className="before-after-wrapper">
+                                {/* Before Image */}
+                                <div className="before-image-container">
+                                    <img
+                                        src="/showcase/site reality.jpg"
+                                        alt="قبل - موقع البناء"
+                                        className="comparison-image"
+                                    />
+                                    <div className="image-label before-label">قبل</div>
+                                </div>
+
+                                {/* After Image with Slider */}
+                                <div className="after-image-container" style={{ clipPath: 'inset(0 50% 0 0)' }} id="afterImageContainer">
+                                    <img
+                                        src="/showcase/design.jpg"
+                                        alt="بعد - التصميم النهائي"
+                                        className="comparison-image"
+                                    />
+                                </div>
+
+                                {/* After Label - Outside clipped container */}
+                                <div className="image-label after-label" style={{ zIndex: 10 }}>بعد</div>
+
+                                {/* Slider Handle */}
+                                <div className="slider-handle" style={{ left: '50%' }} id="sliderHandle">
+                                    <div className="slider-line"></div>
+                                    <div className="slider-button">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                            <path d="M15 18l-6-6 6-6" />
+                                            <path d="M9 18l6-6-6-6" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div className="modern-buttons">
                             <Link to="/about" className="btn btn-outline">

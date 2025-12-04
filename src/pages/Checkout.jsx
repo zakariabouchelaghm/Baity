@@ -189,6 +189,7 @@ ${itemsList}
                                             onChange={handleChange}
                                             className={errors.phone ? 'error' : ''}
                                             placeholder="+971 50 123 4567"
+                                            dir="ltr"
                                         />
                                         {errors.phone && <span className="error-message">{errors.phone}</span>}
                                     </div>
