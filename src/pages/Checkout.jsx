@@ -29,6 +29,13 @@ const Checkout = ({ cart, clearCart }) => {
 
     const [errors, setErrors] = useState({})
     const [isUAE, setIsUAE] = useState(true) // Payment fees toggle
+    const [paymentMethod, setPaymentMethod] = useState('cash') // 'card' or 'cash'
+    const [cardData, setCardData] = useState({
+        cardNumber: '',
+        cardName: '',
+        cvc: '',
+        saveCard: false
+    })
 
     // UAE Emirates/States
     const uaeStates = [
@@ -466,17 +473,103 @@ const Checkout = ({ cart, clearCart }) => {
                                 </div>
                             </div>
 
+                            {/* Payment Section */}
                             <div className="form-section">
-                                <h2 className="section-title">ملاحظات إضافية</h2>
+                                <h2 className="section-title">دفع</h2>
+
+                                {/* Credit Card Option */}
+                                <div className="payment-option-wrapper">
+                                    <label className="payment-option-label">
+                                        <input
+                                            type="radio"
+                                            name="paymentMethod"
+                                            value="card"
+                                            checked={paymentMethod === 'card'}
+                                            onChange={(e) => setPaymentMethod(e.target.value)}
+                                        />
+                                        <span>بطاقة ائتمان</span>
+                                    </label>
+
+                                    {paymentMethod === 'card' && (
+                                        <div className="payment-details">
+                                            <div className="form-group">
+                                                <label htmlFor="cardNumber">رقم البطاقة *</label>
+                                                <input
+                                                    type="text"
+                                                    id="cardNumber"
+                                                    name="cardNumber"
+                                                    value={cardData.cardNumber}
+                                                    onChange={(e) => setCardData({ ...cardData, cardNumber: e.target.value })}
+                                                    placeholder="1234 5678 9012 3456"
+                                                    maxLength="19"
+                                                />
+                                            </div>
+
+                                            <div className="form-group">
+                                                <label htmlFor="cardName">يتم عرض هذا النص في صفحة الطلب *</label>
+                                                <input
+                                                    type="text"
+                                                    id="cardName"
+                                                    name="cardName"
+                                                    value={cardData.cardName}
+                                                    onChange={(e) => setCardData({ ...cardData, cardName: e.target.value })}
+                                                    placeholder="الاسم كما يظهر على البطاقة"
+                                                />
+                                            </div>
+
+                                            <div className="form-group">
+                                                <label htmlFor="cvc">CVC *</label>
+                                                <input
+                                                    type="text"
+                                                    id="cvc"
+                                                    name="cvc"
+                                                    value={cardData.cvc}
+                                                    onChange={(e) => setCardData({ ...cardData, cvc: e.target.value })}
+                                                    placeholder="123"
+                                                    maxLength="4"
+                                                />
+                                            </div>
+
+                                            <div className="form-group">
+                                                <label className="checkbox-label">
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={cardData.saveCard}
+                                                        onChange={(e) => setCardData({ ...cardData, saveCard: e.target.checked })}
+                                                        style={{ marginLeft: '0.5rem', width: 'auto' }}
+                                                    />
+                                                    <span>يتم عرض هذا في صفحة الطلب</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* Cash on Delivery Option */}
+                                <div className="payment-option-wrapper">
+                                    <label className="payment-option-label">
+                                        <input
+                                            type="radio"
+                                            name="paymentMethod"
+                                            value="cash"
+                                            checked={paymentMethod === 'cash'}
+                                            onChange={(e) => setPaymentMethod(e.target.value)}
+                                        />
+                                        <span>الدفع عند الاستلام</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div className="form-section">
+                                <h2 className="section-title">اضف ملاحظة على الطلب</h2>
                                 <div className="form-group">
-                                    <label htmlFor="notes">ملاحظات (اختياري)</label>
                                     <textarea
                                         id="notes"
                                         name="notes"
                                         value={formData.notes}
                                         onChange={handleChange}
                                         rows="4"
-                                        placeholder="أي ملاحظات أو متطلبات خاصة..."
+                                        placeholder="ادخل رسالتك"
                                     ></textarea>
                                 </div>
                             </div>
