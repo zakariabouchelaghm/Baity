@@ -4,7 +4,7 @@ import PaymentModal from '../components/PaymentModal'
 import { offersData } from '../data/offers'
 import './SectionPage.css'
 
-const OtherServices = () => {
+const OtherServices = ({ addToCart }) => {
     const [selectedOffer, setSelectedOffer] = useState(null)
     const offers = offersData.otherServices
 
@@ -31,7 +31,8 @@ const OtherServices = () => {
                             <OfferCard
                                 key={offer.id}
                                 offer={offer}
-                                onOrderClick={setSelectedOffer}
+                                onOrderClick={addToCart}
+                                buttonText="add+"
                             />
                         ))}
                     </div>

@@ -3,11 +3,26 @@ import OfferCard from '../components/OfferCard'
 import PaymentModal from '../components/PaymentModal'
 import './SectionPage.css'
 
-const Modifications = () => {
+const Modifications = ({ addToCart }) => {
     const [selectedOffer, setSelectedOffer] = useState(null)
 
     const offers = [
-        // Offers will be added here
+        {
+            id: 'modification-1',
+            title: 'تعديل مخططات',
+            description: 'تعديل المخططات الهندسية والمعمارية',
+            price: '500.00',
+            currency: 'درهم',
+            notice: 'تبدأ من'
+        },
+        {
+            id: 'modification-2',
+            title: 'الإشراف على التعديلات',
+            description: 'إشراف هندسي على تنفيذ التعديلات',
+            price: '500.00',
+            currency: 'درهم',
+            notice: 'تبدأ من'
+        }
     ]
 
     return (
@@ -34,7 +49,7 @@ const Modifications = () => {
                                 <OfferCard
                                     key={offer.id}
                                     offer={offer}
-                                    onOrderClick={setSelectedOffer}
+                                    onOrderClick={addToCart}
                                     buttonText="add+"
                                 />
                             ))

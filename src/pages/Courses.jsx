@@ -4,9 +4,9 @@ import PaymentModal from '../components/PaymentModal'
 import { offersData } from '../data/offers'
 import './SectionPage.css'
 
-const Courses = () => {
+const Courses = ({ addToCart }) => {
     const [selectedOffer, setSelectedOffer] = useState(null)
-    const offers = offersData.courses
+    const offers = []
 
     return (
         <div className="section-page">
@@ -31,7 +31,8 @@ const Courses = () => {
                             <OfferCard
                                 key={offer.id}
                                 offer={offer}
-                                onOrderClick={setSelectedOffer}
+                                onOrderClick={addToCart}
+                                buttonText="add+"
                             />
                         ))}
                     </div>

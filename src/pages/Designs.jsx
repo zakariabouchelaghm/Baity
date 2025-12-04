@@ -3,11 +3,34 @@ import OfferCard from '../components/OfferCard'
 import PaymentModal from '../components/PaymentModal'
 import './SectionPage.css'
 
-const Designs = () => {
+const Designs = ({ addToCart }) => {
     const [selectedOffer, setSelectedOffer] = useState(null)
 
     const offers = [
-        // Offers will be added here
+        {
+            id: 'design-1',
+            title: 'صمم عظم البيت',
+            description: 'تصميم هيكل عظمي متكامل لمنزلك',
+            price: '500.00',
+            currency: 'درهم',
+            notice: 'تبدأ من'
+        },
+        {
+            id: 'design-2',
+            title: 'صمم كهرباء البيت',
+            description: 'تصميم مخططات الكهرباء والإنارة',
+            price: '500.00',
+            currency: 'درهم',
+            notice: 'تبدأ من'
+        },
+        {
+            id: 'design-3',
+            title: 'صمم خدمات بيتك صح',
+            description: 'تصميم متكامل لخدمات المنزل (سباكة، تكييف، إلخ)',
+            price: '500.00',
+            currency: 'درهم',
+            notice: 'تبدأ من'
+        }
     ]
 
     return (
@@ -34,7 +57,7 @@ const Designs = () => {
                                 <OfferCard
                                     key={offer.id}
                                     offer={offer}
-                                    onOrderClick={setSelectedOffer}
+                                    onOrderClick={addToCart}
                                     buttonText="add+"
                                 />
                             ))

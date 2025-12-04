@@ -1,0 +1,27 @@
+/* Desktop/Mobile visibility toggles */
+.desktop-only {
+    display: block;
+}
+
+.mobile-only {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .desktop-only {
+        display: none;
+    }
+
+    .mobile-only {
+        display: block;
+    }
+}
+
+/* Cart card animations */
+.cart-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cart-card:active {
+    transform: scale(0.98);
+}

@@ -3,11 +3,34 @@ import OfferCard from '../components/OfferCard'
 import PaymentModal from '../components/PaymentModal'
 import './SectionPage.css'
 
-const ConsultationsPage = () => {
+const ConsultationsPage = ({ addToCart }) => {
     const [selectedOffer, setSelectedOffer] = useState(null)
 
     const offers = [
-        // Offers will be added here
+        {
+            id: 'consultation-page-1',
+            title: 'مراجعة أسعار البناء',
+            description: 'مراجعة وتدقيق عروض أسعار المقاولين',
+            price: '500.00',
+            currency: 'درهم',
+            notice: 'ابتداءا من'
+        },
+        {
+            id: 'consultation-page-2',
+            title: 'حساب كميات',
+            description: 'حساب كميات المواد اللازمة للمشروع بدقة',
+            price: '500.00',
+            currency: 'درهم',
+            notice: 'ابتداءا من'
+        },
+        {
+            id: 'consultation-page-3',
+            title: 'مراجعة مخططك قبل الاعتماد',
+            description: 'مراجعة شاملة للمخططات قبل البدء في التنفيذ',
+            price: '500.00',
+            currency: 'درهم',
+            notice: 'ابتداءا من'
+        }
     ]
 
     return (
@@ -34,7 +57,7 @@ const ConsultationsPage = () => {
                                 <OfferCard
                                     key={offer.id}
                                     offer={offer}
-                                    onOrderClick={setSelectedOffer}
+                                    onOrderClick={addToCart}
                                     buttonText="add+"
                                 />
                             ))

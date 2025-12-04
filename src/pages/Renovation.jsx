@@ -4,9 +4,34 @@ import PaymentModal from '../components/PaymentModal'
 import { offersData } from '../data/offers'
 import './SectionPage.css'
 
-const Renovation = () => {
+const Renovation = ({ addToCart }) => {
     const [selectedOffer, setSelectedOffer] = useState(null)
-    const offers = offersData.renovation
+    const offers = [
+        {
+            id: 'renovation-1',
+            title: 'تصميم',
+            description: 'تصميم تجديد شامل للمساحة',
+            price: '500.00',
+            currency: 'درهم',
+            notice: 'تبدأ من'
+        },
+        {
+            id: 'renovation-2',
+            title: 'تسعير',
+            description: 'تسعير مفصل لأعمال التجديد',
+            price: '500.00',
+            currency: 'درهم',
+            notice: 'تبدأ من'
+        },
+        {
+            id: 'renovation-3',
+            title: 'زيارة الموقع و إعطاء النصائح',
+            description: 'زيارة ميدانية لتقديم نصائح التجديد',
+            price: '500.00',
+            currency: 'درهم',
+            notice: 'تبدأ من'
+        }
+    ]
 
     return (
         <div className="section-page">
@@ -31,7 +56,8 @@ const Renovation = () => {
                             <OfferCard
                                 key={offer.id}
                                 offer={offer}
-                                onOrderClick={setSelectedOffer}
+                                onOrderClick={addToCart}
+                                buttonText="add+"
                             />
                         ))}
                     </div>

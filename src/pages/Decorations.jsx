@@ -3,7 +3,7 @@ import OfferCard from '../components/OfferCard'
 import PaymentModal from '../components/PaymentModal'
 import './SectionPage.css'
 
-const Decorations = () => {
+const Decorations = ({ addToCart }) => {
     const [selectedOffer, setSelectedOffer] = useState(null)
 
     const offers = [
@@ -12,14 +12,8 @@ const Decorations = () => {
             title: 'صمم موود بورد و صورة ثلاثية الأبعاد مع التفاصيل',
             description: 'احصل على تصميم موود بورد احترافي وصورة ثلاثية الأبعاد مفصلة لمشروعك',
             price: '500.00',
-            currency: 'AED',
-            notice: 'تبدأ من',
-            image: '/services/decorations.png',
-            features: [
-                'موود بورد احترافي',
-                'صورة ثلاثية الأبعاد عالية الجودة',
-                'تفاصيل كاملة للتصميم'
-            ]
+            currency: 'درهم',
+            notice: 'تبدأ من'
         }
     ]
 
@@ -46,7 +40,7 @@ const Decorations = () => {
                             <OfferCard
                                 key={offer.id}
                                 offer={offer}
-                                onOrderClick={setSelectedOffer}
+                                onOrderClick={addToCart}
                                 buttonText="add+"
                             />
                         ))}

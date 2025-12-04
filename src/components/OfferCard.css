@@ -21,21 +21,6 @@
     position: relative;
 }
 
-.offer-badge {
-    position: absolute;
-    top: -0.5rem;
-    left: -0.5rem;
-    background: var(--gradient-accent);
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: var(--radius-sm);
-    font-family: var(--font-secondary);
-    font-weight: 700;
-    font-size: 0.9rem;
-    box-shadow: var(--shadow-md);
-    animation: pulse 2s infinite;
-}
-
 .offer-title {
     font-family: var(--font-secondary);
     font-size: 1.5rem;
@@ -52,9 +37,7 @@
 }
 
 .offer-pricing {
-    padding: var(--spacing-md) 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+    padding: var(--spacing-sm) 0;
     margin-bottom: var(--spacing-md);
 }
 
@@ -73,45 +56,6 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-}
-
-.price-old {
-    font-size: 1.2rem;
-    color: var(--text-light);
-    text-decoration: line-through;
-}
-
-.offer-features {
-    flex: 1;
-    margin-bottom: var(--spacing-md);
-}
-
-.features-title {
-    font-family: var(--font-secondary);
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: var(--spacing-sm);
-}
-
-.features-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-.features-list li {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-    color: var(--text-secondary);
-    font-size: 1rem;
-}
-
-.features-list svg {
-    flex-shrink: 0;
-    color: var(--secondary);
 }
 
 .offer-btn {
@@ -184,4 +128,24 @@
 .offer-btn:hover::before {
     width: 300px;
     height: 300px;
+}
+
+.btn-icon-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.plus-symbol {
+    margin-top: -2px;
+}
+
+.btn-text {
+    font-weight: 600;
 }

@@ -3,7 +3,7 @@ import OfferCard from '../components/OfferCard'
 import PaymentModal from '../components/PaymentModal'
 import './SectionPage.css'
 
-const DesignFromScratch = () => {
+const DesignFromScratch = ({ addToCart }) => {
     const [selectedOffer, setSelectedOffer] = useState(null)
 
     const offers = [
@@ -12,15 +12,8 @@ const DesignFromScratch = () => {
             title: 'صمم بيتك من الصفر',
             description: 'تصميم شامل ومتكامل لمنزلك من البداية حتى النهاية',
             price: '500.00',
-            currency: 'AED',
-            notice: 'تبدأ من',
-            image: '/services/decorations.png',
-            features: [
-                'تصميم معماري كامل',
-                'مخططات تفصيلية',
-                'صور ثلاثية الأبعاد',
-                'متابعة التنفيذ'
-            ]
+            currency: 'درهم',
+            notice: 'تبدأ من'
         }
     ]
 
@@ -48,7 +41,7 @@ const DesignFromScratch = () => {
                                 <OfferCard
                                     key={offer.id}
                                     offer={offer}
-                                    onOrderClick={setSelectedOffer}
+                                    onOrderClick={addToCart}
                                     buttonText="add+"
                                 />
                             ))
