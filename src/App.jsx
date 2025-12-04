@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -20,8 +20,18 @@ import ConsultationsPage from './pages/ConsultationsPage'
 import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 
+import Contact from './pages/Contact'
+import Message from './pages/Message'
+
 function App() {
-  const [cart, setCart] = useState([])
+  const [cart, setCart] = useState(() => {
+    const savedCart = localStorage.getItem('cart')
+    return savedCart ? JSON.parse(savedCart) : []
+  })
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart))
+  }, [cart])
 
   const addToCart = (offer) => {
     setCart(prevCart => {
@@ -55,6 +65,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/message" element={<Message />} />
         <Route path="/cart" element={<Cart cart={cart} removeFromCart={removeFromCart} updateQuantity={updateQuantity} />} />
         <Route path="/decorations" element={<Decorations addToCart={addToCart} />} />
         <Route path="/consultations" element={<Consultations />} />

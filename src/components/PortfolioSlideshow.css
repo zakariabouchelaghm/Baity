@@ -1,26 +1,23 @@
 .portfolio-slideshow {
     padding: 6rem 0;
-    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    background: white;
     overflow: hidden;
 }
 
-.section-header {
+.portfolio-slideshow .section-header {
     text-align: center;
     margin-bottom: 4rem;
 }
 
-.section-title {
+.portfolio-slideshow .section-title {
     font-family: var(--font-secondary);
     font-size: 3rem;
     font-weight: 800;
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--text-primary);
     margin-bottom: 1rem;
 }
 
-.section-subtitle {
+.portfolio-slideshow .section-subtitle {
     font-size: 1.2rem;
     color: var(--text-secondary);
     max-width: 600px;
@@ -86,6 +83,8 @@
     height: 100%;
     object-fit: cover;
     transition: transform 0.8s ease;
+    filter: contrast(0.95) brightness(0.95);
+    /* Slight downgrade in visual pop */
 }
 
 .slide.active .slide-image {
@@ -232,11 +231,11 @@
         padding: 4rem 0;
     }
 
-    .section-title {
+    .portfolio-slideshow .section-title {
         font-size: 2rem;
     }
 
-    .section-subtitle {
+    .portfolio-slideshow .section-subtitle {
         font-size: 1rem;
     }
 

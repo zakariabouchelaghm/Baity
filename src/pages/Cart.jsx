@@ -13,8 +13,7 @@ const Cart = ({ cart, removeFromCart, updateQuantity }) => {
 
     return (
         <div className="section-page">
-            <div className="page-hero" style={{ height: '40vh' }}>
-                <div className="page-hero-overlay"></div>
+            <div className="section-header">
                 <div className="container">
                     <h1 className="page-title">سلة المشتريات</h1>
                     <p className="page-subtitle">

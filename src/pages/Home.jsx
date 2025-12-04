@@ -53,12 +53,6 @@ const Home = () => {
             description: 'دورات تدريبية متخصصة في التصميم والهندسة',
             image: '/services/courses.png',
             link: '/courses'
-        },
-        {
-            title: 'خدمات أخرى',
-            description: 'خدمات إضافية لتلبية جميع احتياجاتك',
-            image: '/services/other-services.png',
-            link: '/other-services'
         }
     ]
 
@@ -137,14 +131,25 @@ const Home = () => {
 
             {/* Vision Section - رؤيتنا */}
             <section className="vision-section" style={{
-                backgroundImage: 'url(/showcase/GF-105-Family-Living-03.jpg)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundAttachment: 'fixed',
                 position: 'relative',
                 padding: '8rem 0',
-                margin: '4rem 0'
+                margin: '4rem 0',
+                overflow: 'hidden'
             }}>
+                <div style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    backgroundImage: 'url(/showcase/GF-105-Family-Living-03.jpg)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundAttachment: 'fixed',
+                    filter: 'blur(3px)',
+                    transform: 'scale(1.1)', // Prevent blur edges
+                    zIndex: 0
+                }}></div>
                 <div style={{
                     position: 'absolute',
                     top: 0,
@@ -178,7 +183,15 @@ const Home = () => {
             </section>
 
             {/* Portfolio Slideshow - أعمالنا */}
-            <PortfolioSlideshow />
+            <section className="portfolio-section">
+                <div className="container">
+                    <h2 className="section-title">أعمالنا</h2>
+                    <p className="section-subtitle">
+                        استعرض مجموعة من أفضل مشاريعنا المنجزة
+                    </p>
+                </div>
+                <PortfolioSlideshow />
+            </section>
 
             {/* Modern Design Section */}
             <section className="modern-design">
@@ -190,18 +203,27 @@ const Home = () => {
                                 نحن شركة تصميم داخلي مشهورة، متخصصة في التصميمات الكلاسيكية والحديثة. مع مجموعة متنوعة من الخدمات، نحن نلبي جميع أنواع المساحات السكنية، من المساحات الصغيرة إلى العقارات الكبيرة
                             </p>
 
-                            <div className="modern-buttons">
-                                <Link to="/about" className="btn btn-outline">
-                                    المزيد
-                                </Link>
 
-                            </div>
                         </div>
 
                         <div className="modern-design-image-placeholder">
-                            <div className="placeholder-box">
-                                <span>صورة التصميم العصري</span>
-                            </div>
+                            <img
+                                src="public/showcase/3aaa1069-a4ac-42c2-8ef3-390cc3a56a3d.jpg"
+                                alt="تصميم عصري"
+                                style={{
+                                    width: '100%',
+                                    height: '500px',
+                                    borderRadius: 'var(--radius-lg)',
+                                    boxShadow: 'var(--shadow-xl)',
+                                    border: '4px solid #d4af37' // Gold border
+                                }}
+                            />
+                        </div>
+                        <div className="modern-buttons">
+                            <Link to="/about" className="btn btn-outline">
+                                المزيد
+                            </Link>
+
                         </div>
                     </div>
                 </div>
@@ -236,18 +258,8 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* CTA Section */}
-            <section className="cta">
-                <div className="container">
-                    <div className="cta-content">
-                        <h2>هل أنت مستعد لتحويل حلمك إلى واقع؟</h2>
-                        <p>تواصل معنا اليوم واحصل على استشارة مجانية</p>
-                        <Link to="/consultations" className="btn btn-primary">
-                            احجز استشارة مجانية
-                        </Link>
-                    </div>
-                </div>
-            </section>
+
+
 
             {/* Payment Modal */}
             {

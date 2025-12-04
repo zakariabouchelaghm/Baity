@@ -77,13 +77,6 @@ const PortfolioSlideshow = () => {
     return (
         <section className="portfolio-slideshow">
             <div className="container">
-                <div className="section-header">
-                    <h2 className="section-title">أعمالنا</h2>
-                    <p className="section-subtitle">
-                        استعرض مجموعة من أفضل مشاريعنا المنجزة
-                    </p>
-                </div>
-
                 <div className="slideshow-container">
                     <div className="slideshow-wrapper">
                         {portfolioItems.map((item, index) => (

@@ -35,8 +35,7 @@ const Consultations = () => {
 
     return (
         <div className="section-page">
-            <div className="page-hero">
-                <div className="page-hero-overlay"></div>
+            <div className="section-header">
                 <div className="container">
                     <h1 className="page-title">خدمات الاستشارات</h1>
                     <p className="page-subtitle">

@@ -88,7 +88,8 @@
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     min-width: 220px;
     padding: 0.5rem 0;
-    margin-top: 0.5rem;
+    margin-top: 0;
+    /* Changed from 0.5rem to 0 to fix hover gap */
     z-index: 1000;
     animation: dropdownFadeIn 0.3s ease;
 }

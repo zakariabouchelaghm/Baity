@@ -18,9 +18,14 @@ const OfferCard = ({ offer, onOrderClick, buttonText = 'اطلب الآن' }) =>
                     <p className="offer-notice">{offer.notice}</p>
                 )}
                 <div className="price-container">
-                    {offer.price && (
+                    {offer.oldPrice && (
+                        <span className="price-old" style={{ textDecoration: 'line-through', color: '#999', fontSize: '1rem' }}>
+                            {formatPrice(offer.oldPrice, offer.currency || 'ريال')}
+                        </span>
+                    )}
+                    {(offer.newPrice || offer.price) && (
                         <span className="price-new">
-                            {formatPrice(offer.price, offer.currency || 'ريال')}
+                            {formatPrice(offer.newPrice || offer.price, offer.currency || 'ريال')}
                         </span>
                     )}
                 </div>

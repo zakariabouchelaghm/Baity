@@ -10,8 +10,7 @@ const Courses = ({ addToCart }) => {
 
     return (
         <div className="section-page">
-            <div className="page-hero">
-                <div className="page-hero-overlay"></div>
+            <div className="section-header">
                 <div className="container">
                     <h1 className="page-title">دورات</h1>
                     <p className="page-subtitle">

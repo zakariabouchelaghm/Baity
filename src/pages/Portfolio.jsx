@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useSearchParams } from 'react-router-dom'
 import './Portfolio.css'
+import './SectionPage.css'
 
 const Portfolio = () => {
     const [selectedImage, setSelectedImage] = useState(null)
     const location = useLocation()
+    const [searchParams] = useSearchParams()
 
     // All showcase images
     const showcaseImages = [
@@ -42,10 +44,22 @@ const Portfolio = () => {
         'صالة 3.jpg'
     ]
 
+    // Handle URL parameters to open specific images
+    useEffect(() => {
+        const imageIndex = searchParams.get('image')
+        if (imageIndex !== null) {
+            const index = parseInt(imageIndex, 10)
+            if (index >= 0 && index < showcaseImages.length) {
+                setSelectedImage(`/showcase/${showcaseImages[index]}`)
+            }
+        }
+    }, [searchParams, showcaseImages])
+
     // Update meta tags when image is selected for better social sharing
     useEffect(() => {
         if (selectedImage) {
-            const imageUrl = `${window.location.origin}${selectedImage}`;
+            const baseUrl = 'https://baity.onrender.com';
+            const imageUrl = `${baseUrl}${selectedImage}`;
             updateMetaTags(imageUrl);
         }
     }, [selectedImage])
@@ -59,6 +73,7 @@ const Portfolio = () => {
         updateMetaTag('og:image:height', '630');
         updateMetaTag('og:title', 'تصميم رائع من بيتي');
         updateMetaTag('og:description', 'اطلع على تصاميمنا المميزة في التصميم الداخلي');
+        updateMetaTag('og:url', 'https://baity.onrender.com/portfolio');
 
         // Twitter Card
         updateMetaTag('twitter:card', 'summary_large_image', 'name');
@@ -76,22 +91,27 @@ const Portfolio = () => {
         element.setAttribute('content', content);
     }
 
-    const handleShare = (platform, image) => {
-        const imageUrl = `${window.location.origin}/showcase/${image}`;
-        const shareText = 'تحقق من هذا التصميم الرائع من بيتي';
-        const pageUrl = `${window.location.origin}/portfolio`;
+    const handleShare = (platform, image, index) => {
+        const baseUrl = 'https://baity.onrender.com';
+        const imageUrl = `${baseUrl}/showcase/${image}`;
+        // Create a unique URL for this specific image
+        const imagePageUrl = `${baseUrl}/portfolio?image=${index}`;
+        const shareText = `تحقق من هذا التصميم الرائع من بيتي`;
 
         let shareUrl = '';
 
         switch (platform) {
             case 'twitter':
-                shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(pageUrl)}`;
+                // Twitter/X share with specific image URL
+                shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(imagePageUrl)}&via=baity`;
                 break;
             case 'facebook':
-                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}&quote=${encodeURIComponent(shareText)}`;
+                // Facebook share with specific image URL
+                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(imagePageUrl)}&quote=${encodeURIComponent(shareText)}`;
                 break;
             case 'whatsapp':
-                shareUrl = `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + pageUrl)}`;
+                // WhatsApp share with specific image URL
+                shareUrl = `https://wa.me/?text=${encodeURIComponent(shareText + '\n' + imagePageUrl)}`;
                 break;
             default:
                 return;
@@ -102,42 +122,15 @@ const Portfolio = () => {
 
     return (
         <div className="portfolio-page">
-            {/* Hero Section with Background */}
-            <section className="page-hero" style={{
-                backgroundImage: 'url(/showcase/FF-Hall-06.jpg)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                position: 'relative',
-                padding: '8rem 0 4rem',
-                marginBottom: '4rem'
-            }}>
-                <div style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    background: 'linear-gradient(135deg, rgba(127, 6, 33, 0.9), rgba(0, 0, 0, 0.7))',
-                    zIndex: 1
-                }}></div>
-                <div className="container" style={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
-                    <h1 style={{
-                        fontSize: '3.5rem',
-                        fontWeight: '800',
-                        color: 'white',
-                        marginBottom: '1rem',
-                        textShadow: '0 4px 20px rgba(0, 0, 0, 0.5)'
-                    }}>أعمالنا</h1>
-                    <p style={{
-                        fontSize: '1.3rem',
-                        color: 'rgba(255, 255, 255, 0.9)',
-                        maxWidth: '600px',
-                        margin: '0 auto'
-                    }}>
+            {/* Header Section */}
+            <div className="section-header">
+                <div className="container">
+                    <h1 className="page-title">أعمالنا</h1>
+                    <p className="page-subtitle">
                         استعرض مجموعة من أفضل مشاريعنا وتصاميمنا المنجزة
                     </p>
                 </div>
-            </section>
+            </div>
 
             <div className="container portfolio-content">
                 <div className="portfolio-grid">
@@ -167,7 +160,7 @@ const Portfolio = () => {
                                             title="مشاركة على X"
                                             onClick={(e) => {
                                                 e.stopPropagation();
-                                                handleShare('twitter', image);
+                                                handleShare('twitter', image, index);
                                             }}
                                         >
                                             𝕏
@@ -177,7 +170,7 @@ const Portfolio = () => {
                                             title="مشاركة على Facebook"
                                             onClick={(e) => {
                                                 e.stopPropagation();
-                                                handleShare('facebook', image);
+                                                handleShare('facebook', image, index);
                                             }}
                                         >
                                             f
@@ -187,7 +180,7 @@ const Portfolio = () => {
                                             title="مشاركة على WhatsApp"
                                             onClick={(e) => {
                                                 e.stopPropagation();
-                                                handleShare('whatsapp', image);
+                                                handleShare('whatsapp', image, index);
                                             }}
                                         >
                                             📱
