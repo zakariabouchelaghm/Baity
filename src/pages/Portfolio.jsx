@@ -55,28 +55,39 @@ const Portfolio = () => {
 
     // Update meta tags when image is selected for better social sharing
     useEffect(() => {
-        if (selectedImage) {
-            const baseUrl = 'https://baity.onrender.com';
-            const imageUrl = `${baseUrl}${selectedImage}`;
-            updateMetaTags(imageUrl);
-        }
-    }, [selectedImage])
+        const baseUrl = 'https://baity.onrender.com';
 
-    const updateMetaTags = (imageUrl) => {
+        if (imageId) {
+            const index = parseInt(imageId, 10);
+            if (index >= 0 && index < showcaseImages.length) {
+                const imageUrl = `${baseUrl}/showcase/${showcaseImages[index]}`;
+                const pageUrl = `${baseUrl}/portfolio/image/${index}`;
+                updateMetaTags(imageUrl, pageUrl, `تصميم رائع ${index + 1} من بيتي`);
+            }
+        } else if (selectedImage) {
+            const imageUrl = `${baseUrl}${selectedImage}`;
+            updateMetaTags(imageUrl, `${baseUrl}/portfolio`, 'تصميم رائع من بيتي');
+        }
+    }, [imageId, selectedImage, showcaseImages])
+
+    const updateMetaTags = (imageUrl, pageUrl, title) => {
         // Update or create Open Graph meta tags
         updateMetaTag('og:image', imageUrl);
         updateMetaTag('og:image:secure_url', imageUrl);
         updateMetaTag('og:image:type', 'image/jpeg');
         updateMetaTag('og:image:width', '1200');
         updateMetaTag('og:image:height', '630');
-        updateMetaTag('og:title', 'تصميم رائع من بيتي');
+        updateMetaTag('og:title', title);
         updateMetaTag('og:description', 'اطلع على تصاميمنا المميزة في التصميم الداخلي');
-        updateMetaTag('og:url', 'https://baity.onrender.com/portfolio');
+        updateMetaTag('og:url', pageUrl);
 
         // Twitter Card
         updateMetaTag('twitter:card', 'summary_large_image', 'name');
         updateMetaTag('twitter:image', imageUrl, 'name');
-        updateMetaTag('twitter:title', 'تصميم رائع من بيتي', 'name');
+        updateMetaTag('twitter:title', title, 'name');
+
+        // Update page title
+        document.title = `${title} - بيتي`;
     }
 
     const updateMetaTag = (property, content, attr = 'property') => {
