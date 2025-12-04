@@ -18,6 +18,7 @@ import Designs from './pages/Designs'
 import Modifications from './pages/Modifications'
 import ConsultationsPage from './pages/ConsultationsPage'
 import Cart from './pages/Cart'
+import Checkout from './pages/Checkout'
 
 function App() {
   const [cart, setCart] = useState([])
@@ -67,6 +68,7 @@ function App() {
         <Route path="/designs" element={<Designs addToCart={addToCart} />} />
         <Route path="/modifications" element={<Modifications addToCart={addToCart} />} />
         <Route path="/consultations-page" element={<ConsultationsPage addToCart={addToCart} />} />
+        <Route path="/checkout" element={<Checkout cart={cart} clearCart={() => setCart([])} />} />
       </Routes>
       <Footer />
     </div>

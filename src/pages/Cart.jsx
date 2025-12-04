@@ -1,8 +1,10 @@
+import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import './SectionPage.css'
 import './Cart.css'
 
 const Cart = ({ cart, removeFromCart, updateQuantity }) => {
+    const navigate = useNavigate()
     const calculateTotal = () => {
         return cart.reduce((total, item) => {
             return total + (parseFloat(item.price) * item.quantity)
@@ -141,7 +143,11 @@ const Cart = ({ cart, removeFromCart, updateQuantity }) => {
                                     <span>المجموع الكلي:</span>
                                     <span>{calculateTotal()} درهم</span>
                                 </div>
-                                <button className="btn btn-primary" style={{ width: '100%' }}>
+                                <button
+                                    className="btn btn-primary"
+                                    style={{ width: '100%' }}
+                                    onClick={() => navigate('/checkout')}
+                                >
                                     تأكيد الطلب
                                 </button>
                             </div>
