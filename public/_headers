@@ -1,0 +1,7 @@
+/*
+  X-Robots-Tag: all
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+
+/portfolio/image/*
+  X-Robots-Tag: all
