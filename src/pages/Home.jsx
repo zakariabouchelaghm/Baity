@@ -232,17 +232,6 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* Portfolio Slideshow - أعمالنا */}
-            <section className="portfolio-section">
-                <div className="container">
-                    <h2 className="section-title">أعمالنا</h2>
-                    <p className="section-subtitle">
-                        استعرض مجموعة من أفضل مشاريعنا المنجزة
-                    </p>
-                </div>
-                <PortfolioSlideshow />
-            </section>
-
             {/* Modern Design Section */}
             <section className="modern-design">
                 <div className="container">
@@ -300,6 +289,17 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
+            </section>
+
+            {/* Portfolio Slideshow - أعمالنا */}
+            <section className="portfolio-section">
+                <div className="container">
+                    <h2 className="section-title">أعمالنا</h2>
+                    <p className="section-subtitle">
+                        استعرض مجموعة من أفضل مشاريعنا المنجزة
+                    </p>
+                </div>
+                <PortfolioSlideshow />
             </section>
 
             {/* Why Choose Us Section */}

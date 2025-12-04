@@ -57,6 +57,13 @@
     background: white;
 }
 
+/* Force LTR for phone input */
+.form-group input[type="tel"] {
+    direction: ltr !important;
+    text-align: left !important;
+    unicode-bidi: plaintext;
+}
+
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
