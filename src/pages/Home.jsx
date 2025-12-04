@@ -81,7 +81,7 @@ const Home = () => {
                         <Link to="/consultations" className="btn btn-outline">
                             احجز استشارة
                         </Link>
-                        <a href="#footer" className="btn btn-accent" style={{ backgroundColor: '#d4af37', color: 'white', border: 'none' }}>
+                        <a href="#footer" className="btn btn-accent" style={{ backgroundColor: 'white', color: '#7F0621', border: 'none' }}>
                             اتصل بنا
                         </a>
                     </div>
@@ -132,6 +132,48 @@ const Home = () => {
                             />
                         ))}
                     </div>
+                </div>
+            </section>
+
+            {/* Vision Section - رؤيتنا */}
+            <section className="vision-section" style={{
+                backgroundImage: 'url(/showcase/GF-105-Family-Living-03.jpg)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundAttachment: 'fixed',
+                position: 'relative',
+                padding: '8rem 0',
+                margin: '4rem 0'
+            }}>
+                <div style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    background: 'linear-gradient(135deg, rgba(127, 6, 33, 0.92), rgba(0, 0, 0, 0.85))',
+                    zIndex: 1
+                }}></div>
+                <div className="container" style={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
+                    <h2 style={{
+                        fontSize: '3rem',
+                        fontWeight: '800',
+                        color: 'white',
+                        marginBottom: '2rem',
+                        textShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
+                        fontFamily: 'var(--font-secondary)'
+                    }}>رؤيتنا</h2>
+                    <p style={{
+                        fontSize: '1.4rem',
+                        lineHeight: '2',
+                        color: 'rgba(255, 255, 255, 0.95)',
+                        maxWidth: '900px',
+                        margin: '0 auto',
+                        textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)',
+                        fontWeight: '400'
+                    }}>
+                        نطمح أن نكون الخيار الأول للعملاء الذين يسعون الى أناقة أبدية في منازلهم. من خلال البقاء في طليعة اتجاهات التصميم و تقديم جودة متفوقة بشكل مستمر, نهدف الى وضع معايير جديدة في الصناعة وترك تأثير يدوم من التميز
+                    </p>
                 </div>
             </section>
 
