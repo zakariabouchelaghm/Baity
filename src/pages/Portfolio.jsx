@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react'
-import { useLocation, useSearchParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import './Portfolio.css'
 import './SectionPage.css'
 
 const Portfolio = () => {
     const [selectedImage, setSelectedImage] = useState(null)
-    const location = useLocation()
-    const [searchParams] = useSearchParams()
+    const { imageId } = useParams()
 
     // All showcase images
     const showcaseImages = [
@@ -46,14 +45,13 @@ const Portfolio = () => {
 
     // Handle URL parameters to open specific images
     useEffect(() => {
-        const imageIndex = searchParams.get('image')
-        if (imageIndex !== null) {
-            const index = parseInt(imageIndex, 10)
+        if (imageId) {
+            const index = parseInt(imageId, 10)
             if (index >= 0 && index < showcaseImages.length) {
                 setSelectedImage(`/showcase/${showcaseImages[index]}`)
             }
         }
-    }, [searchParams, showcaseImages])
+    }, [imageId, showcaseImages])
 
     // Update meta tags when image is selected for better social sharing
     useEffect(() => {
@@ -94,8 +92,8 @@ const Portfolio = () => {
     const handleShare = (platform, image, index) => {
         const baseUrl = 'https://baity.onrender.com';
         const imageUrl = `${baseUrl}/showcase/${image}`;
-        // Create a unique URL for this specific image
-        const imagePageUrl = `${baseUrl}/portfolio?image=${index}`;
+        // Create a clean URL for this specific image (like /portfolio/image/5)
+        const imagePageUrl = `${baseUrl}/portfolio/image/${index}`;
         const shareText = `تحقق من هذا التصميم الرائع من بيتي`;
 
         let shareUrl = '';

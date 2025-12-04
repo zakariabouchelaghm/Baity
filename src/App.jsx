@@ -75,6 +75,7 @@ function App() {
         <Route path="/renovation" element={<Renovation addToCart={addToCart} />} />
         <Route path="/courses" element={<Courses addToCart={addToCart} />} />
         <Route path="/other-services" element={<OtherServices addToCart={addToCart} />} />
+        <Route path="/portfolio/image/:imageId" element={<Portfolio />} />
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/design-from-scratch" element={<DesignFromScratch addToCart={addToCart} />} />
         <Route path="/designs" element={<Designs addToCart={addToCart} />} />
