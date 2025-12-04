@@ -102,12 +102,42 @@ const Portfolio = () => {
 
     return (
         <div className="portfolio-page">
-            <div className="portfolio-header">
-                <div className="container">
-                    <h1 className="portfolio-title">أعمالنا</h1>
-                    <p className="portfolio-subtitle">استكشف مجموعة من أفضل تصاميمنا ومشاريعنا المنجزة</p>
+            {/* Hero Section with Background */}
+            <section className="page-hero" style={{
+                backgroundImage: 'url(/showcase/FF-Hall-06.jpg)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                position: 'relative',
+                padding: '8rem 0 4rem',
+                marginBottom: '4rem'
+            }}>
+                <div style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    background: 'linear-gradient(135deg, rgba(127, 6, 33, 0.9), rgba(0, 0, 0, 0.7))',
+                    zIndex: 1
+                }}></div>
+                <div className="container" style={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
+                    <h1 style={{
+                        fontSize: '3.5rem',
+                        fontWeight: '800',
+                        color: 'white',
+                        marginBottom: '1rem',
+                        textShadow: '0 4px 20px rgba(0, 0, 0, 0.5)'
+                    }}>أعمالنا</h1>
+                    <p style={{
+                        fontSize: '1.3rem',
+                        color: 'rgba(255, 255, 255, 0.9)',
+                        maxWidth: '600px',
+                        margin: '0 auto'
+                    }}>
+                        استعرض مجموعة من أفضل مشاريعنا وتصاميمنا المنجزة
+                    </p>
                 </div>
-            </div>
+            </section>
 
             <div className="container portfolio-content">
                 <div className="portfolio-grid">

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import OfferCard from '../components/OfferCard'
 import PaymentModal from '../components/PaymentModal'
+import PortfolioSlideshow from '../components/PortfolioSlideshow'
 import { offersData } from '../data/offers'
 import './Home.css'
 
@@ -134,38 +135,8 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* Showcase Section - أعمالنا */}
-            <section className="showcase">
-                <div className="container">
-                    <h2 className="section-title">أعمالنا</h2>
-                    <p className="section-subtitle">
-                        اطلع على مجموعة من أفضل مشاريعنا وتصاميمنا المنجزة
-                    </p>
-                    <div className="showcase-grid">
-                        {[
-                            'GF-101-Sitting-01.jpg',
-                            'FF-Hall-05.jpg',
-                            'GF-106-Master-Bedroom-02.jpg',
-                            'Hall-01.jpg',
-                            'EXT-01.jpg',
-                            'GF-105-Family-Living-03.jpg'
-                        ].map((image, index) => (
-                            <div key={index} className="showcase-item">
-                                <img
-                                    src={`/showcase/${image}`}
-                                    alt={`مشروع ${index + 1}`}
-                                    loading="lazy"
-                                />
-                            </div>
-                        ))}
-                    </div>
-                    <div className="showcase-cta">
-                        <Link to="/portfolio" className="btn btn-primary">
-                            عرض جميع الأعمال
-                        </Link>
-                    </div>
-                </div>
-            </section>
+            {/* Portfolio Slideshow - أعمالنا */}
+            <PortfolioSlideshow />
 
             {/* Modern Design Section */}
             <section className="modern-design">
@@ -192,10 +163,10 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-            </section >
+            </section>
 
             {/* Why Choose Us Section */}
-            < section className="why-us" >
+            <section className="why-us">
                 <div className="container">
                     <h2 className="section-title">لماذا تختار بيتي؟</h2>
                     <div className="features-grid">
@@ -216,15 +187,15 @@ const Home = () => {
                         </div>
                         <div className="feature-item">
                             <div className="feature-icon">⏱️</div>
-                            <h3>التزام بالمواعيد</h3>
+                            <h3>الالتزام بالمواعيد</h3>
                             <p>نحرص على تسليم المشاريع في الوقت المحدد</p>
                         </div>
                     </div>
                 </div>
-            </section >
+            </section>
 
             {/* CTA Section */}
-            < section className="cta" >
+            <section className="cta">
                 <div className="container">
                     <div className="cta-content">
                         <h2>هل أنت مستعد لتحويل حلمك إلى واقع؟</h2>
@@ -234,7 +205,7 @@ const Home = () => {
                         </Link>
                     </div>
                 </div>
-            </section >
+            </section>
 
             {/* Payment Modal */}
             {
@@ -245,7 +216,7 @@ const Home = () => {
                     />
                 )
             }
-        </div >
+        </div>
     )
 }
 

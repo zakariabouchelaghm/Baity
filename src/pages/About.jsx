@@ -3,12 +3,42 @@ import './About.css'
 const About = () => {
     return (
         <div className="about-page">
-            <div className="about-header">
-                <div className="container">
-                    <h1 className="about-title">من نحن</h1>
-                    <p className="about-subtitle">شركة إم بي كي - التميز في التصميم الداخلي</p>
+            {/* Hero Section with Background */}
+            <section className="page-hero" style={{
+                backgroundImage: 'url(/showcase/GF-101-Sitting-02.jpg)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                position: 'relative',
+                padding: '8rem 0 4rem',
+                marginBottom: '4rem'
+            }}>
+                <div style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    background: 'linear-gradient(135deg, rgba(127, 6, 33, 0.9), rgba(0, 0, 0, 0.7))',
+                    zIndex: 1
+                }}></div>
+                <div className="container" style={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
+                    <h1 style={{
+                        fontSize: '3.5rem',
+                        fontWeight: '800',
+                        color: 'white',
+                        marginBottom: '1rem',
+                        textShadow: '0 4px 20px rgba(0, 0, 0, 0.5)'
+                    }}>من نحن</h1>
+                    <p style={{
+                        fontSize: '1.3rem',
+                        color: 'rgba(255, 255, 255, 0.9)',
+                        maxWidth: '600px',
+                        margin: '0 auto'
+                    }}>
+                        نحن شركة تصميم داخلي مشهورة ومتخصصة في التصميمات الكلاسيكية والحديثة
+                    </p>
                 </div>
-            </div>
+            </section>
 
             <div className="container about-content">
                 <section className="about-section">
@@ -103,4 +133,3 @@ const About = () => {
 }
 
 export default About
-
