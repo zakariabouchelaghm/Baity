@@ -50,20 +50,6 @@ const Portfolio = () => {
             if (index >= 0 && index < showcaseImages.length) {
                 setSelectedImage(`/showcase/${showcaseImages[index]}`)
             }
-        }
-    }, [imageId, showcaseImages])
-
-    // Update meta tags when image is selected for better social sharing
-    useEffect(() => {
-        const baseUrl = 'https://baity.onrender.com';
-
-        if (imageId) {
-            const index = parseInt(imageId, 10);
-            if (index >= 0 && index < showcaseImages.length) {
-                const imageUrl = `${baseUrl}/showcase/${showcaseImages[index]}`;
-                const pageUrl = `${baseUrl}/portfolio/image/${index}`;
-                updateMetaTags(imageUrl, pageUrl, `تصميم رائع ${index + 1} من بيتي`);
-            }
         } else if (selectedImage) {
             const imageUrl = `${baseUrl}${selectedImage}`;
             updateMetaTags(imageUrl, `${baseUrl}/portfolio`, 'تصميم رائع من بيتي');
@@ -101,7 +87,7 @@ const Portfolio = () => {
     }
 
     const handleShare = (platform, image, index) => {
-        const baseUrl = 'https://baity.onrender.com';
+        const baseUrl = 'https://baity.netlify.app';
         const imageUrl = `${baseUrl}/showcase/${image}`;
         // Create a clean URL for this specific image (like /portfolio/image/5)
         const imagePageUrl = `${baseUrl}/portfolio/image/${index}`;
