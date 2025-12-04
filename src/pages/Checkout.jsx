@@ -16,10 +16,19 @@ const Checkout = ({ cart, clearCart }) => {
         city: '',
         state: '',
         country: 'الإمارات العربية المتحدة',
-        notes: ''
+        notes: '',
+        // Different delivery address
+        useDifferentDelivery: false,
+        deliveryFirstName: '',
+        deliveryLastName: '',
+        deliveryAddress: '',
+        deliveryPostalCode: '',
+        deliveryCity: '',
+        deliveryState: ''
     })
 
     const [errors, setErrors] = useState({})
+    const [isUAE, setIsUAE] = useState(true) // Payment fees toggle
 
     // UAE Emirates/States
     const uaeStates = [
@@ -91,6 +100,28 @@ const Checkout = ({ cart, clearCart }) => {
         }
         if (!formData.postalCode.trim()) {
             newErrors.postalCode = 'الرمز البريدي مطلوب'
+        }
+
+        // Validate delivery address if different delivery is enabled
+        if (formData.useDifferentDelivery) {
+            if (!formData.deliveryFirstName.trim()) {
+                newErrors.deliveryFirstName = 'الاسم الأول مطلوب'
+            }
+            if (!formData.deliveryLastName.trim()) {
+                newErrors.deliveryLastName = 'اسم العائلة مطلوب'
+            }
+            if (!formData.deliveryAddress.trim()) {
+                newErrors.deliveryAddress = 'العنوان مطلوب'
+            }
+            if (!formData.deliveryCity.trim()) {
+                newErrors.deliveryCity = 'المدينة مطلوبة'
+            }
+            if (!formData.deliveryState) {
+                newErrors.deliveryState = 'الإمارة مطلوبة'
+            }
+            if (!formData.deliveryPostalCode.trim()) {
+                newErrors.deliveryPostalCode = 'الرمز البريدي مطلوب'
+            }
         }
 
         setErrors(newErrors)
@@ -203,8 +234,6 @@ const Checkout = ({ cart, clearCart }) => {
                             </div>
 
                             <div className="form-section">
-                                <h2 className="section-title">عنوان التسليم</h2>
-
                                 <div className="form-group">
                                     <label htmlFor="address">العنوان *</label>
                                     <input
@@ -280,6 +309,160 @@ const Checkout = ({ cart, clearCart }) => {
                                             className="readonly"
                                         />
                                     </div>
+                                </div>
+
+                                {/* Different Delivery Address Toggle */}
+                                <div className="form-group" style={{ marginTop: '2rem' }}>
+                                    <label className="toggle-label">
+                                        <span>استخدام عنوان توصيل مختلف</span>
+                                        <div className="toggle-switch">
+                                            <input
+                                                type="checkbox"
+                                                id="useDifferentDelivery"
+                                                name="useDifferentDelivery"
+                                                checked={formData.useDifferentDelivery}
+                                                onChange={(e) => handleChange({ target: { name: 'useDifferentDelivery', value: e.target.checked } })}
+                                            />
+                                            <span className="toggle-slider"></span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            {/* Different Delivery Address Section */}
+                            {formData.useDifferentDelivery && (
+                                <div className="form-section delivery-section">
+                                    <h2 className="section-title">عنوان التوصيل</h2>
+
+                                    <div className="form-row">
+                                        <div className="form-group">
+                                            <label htmlFor="deliveryFirstName">الاسم الأول *</label>
+                                            <input
+                                                type="text"
+                                                id="deliveryFirstName"
+                                                name="deliveryFirstName"
+                                                value={formData.deliveryFirstName}
+                                                onChange={handleChange}
+                                                className={errors.deliveryFirstName ? 'error' : ''}
+                                                placeholder="أدخل الاسم الأول"
+                                            />
+                                            {errors.deliveryFirstName && <span className="error-message">{errors.deliveryFirstName}</span>}
+                                        </div>
+
+                                        <div className="form-group">
+                                            <label htmlFor="deliveryLastName">اسم العائلة *</label>
+                                            <input
+                                                type="text"
+                                                id="deliveryLastName"
+                                                name="deliveryLastName"
+                                                value={formData.deliveryLastName}
+                                                onChange={handleChange}
+                                                className={errors.deliveryLastName ? 'error' : ''}
+                                                placeholder="أدخل اسم العائلة"
+                                            />
+                                            {errors.deliveryLastName && <span className="error-message">{errors.deliveryLastName}</span>}
+                                        </div>
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label htmlFor="deliveryAddress">العنوان *</label>
+                                        <input
+                                            type="text"
+                                            id="deliveryAddress"
+                                            name="deliveryAddress"
+                                            value={formData.deliveryAddress}
+                                            onChange={handleChange}
+                                            className={errors.deliveryAddress ? 'error' : ''}
+                                            placeholder="الشارع، رقم المبنى، الحي"
+                                        />
+                                        {errors.deliveryAddress && <span className="error-message">{errors.deliveryAddress}</span>}
+                                    </div>
+
+                                    <div className="form-row">
+                                        <div className="form-group">
+                                            <label htmlFor="deliveryCity">المدينة *</label>
+                                            <input
+                                                type="text"
+                                                id="deliveryCity"
+                                                name="deliveryCity"
+                                                value={formData.deliveryCity}
+                                                onChange={handleChange}
+                                                className={errors.deliveryCity ? 'error' : ''}
+                                                placeholder="المدينة"
+                                            />
+                                            {errors.deliveryCity && <span className="error-message">{errors.deliveryCity}</span>}
+                                        </div>
+
+                                        <div className="form-group">
+                                            <label htmlFor="deliveryPostalCode">الرمز البريدي *</label>
+                                            <input
+                                                type="text"
+                                                id="deliveryPostalCode"
+                                                name="deliveryPostalCode"
+                                                value={formData.deliveryPostalCode}
+                                                onChange={handleChange}
+                                                className={errors.deliveryPostalCode ? 'error' : ''}
+                                                placeholder="12345"
+                                            />
+                                            {errors.deliveryPostalCode && <span className="error-message">{errors.deliveryPostalCode}</span>}
+                                        </div>
+                                    </div>
+
+                                    <div className="form-row">
+                                        <div className="form-group">
+                                            <label htmlFor="deliveryState">الإمارة *</label>
+                                            <select
+                                                id="deliveryState"
+                                                name="deliveryState"
+                                                value={formData.deliveryState}
+                                                onChange={handleChange}
+                                                className={errors.deliveryState ? 'error' : ''}
+                                            >
+                                                <option value="">اختر الإمارة</option>
+                                                {uaeStates.map((state) => (
+                                                    <option key={state} value={state}>
+                                                        {state}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                            {errors.deliveryState && <span className="error-message">{errors.deliveryState}</span>}
+                                        </div>
+
+                                        <div className="form-group">
+                                            <label htmlFor="deliveryCountry">الدولة</label>
+                                            <input
+                                                type="text"
+                                                id="deliveryCountry"
+                                                value="الإمارات العربية المتحدة"
+                                                readOnly
+                                                className="readonly"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Payment Fees Section */}
+                            <div className="form-section">
+                                <h2 className="section-title">رسوم الدفع</h2>
+                                <div className="form-group">
+                                    <label className="radio-label">
+                                        <input
+                                            type="radio"
+                                            name="paymentRegion"
+                                            checked={true}
+                                            disabled
+                                            readOnly
+                                        />
+                                        <span>UAE (مجاناً)</span>
+                                    </label>
+                                    <p className="toggle-note">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                        </svg>
+                                        التوصيل مجاني داخل الإمارات العربية المتحدة
+                                    </p>
                                 </div>
                             </div>
 
