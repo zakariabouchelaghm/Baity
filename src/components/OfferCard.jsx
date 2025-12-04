@@ -30,9 +30,7 @@ const OfferCard = ({ offer, onOrderClick, buttonText = 'اطلب الآن' }) =>
                 className="btn btn-primary offer-btn"
                 onClick={() => onOrderClick(offer)}
             >
-                <span className="btn-icon-circle">
-                    <span className="plus-symbol">+</span>
-                </span>
+                <img src="/plus.png" alt="Add" className="btn-icon-plus" />
                 <span className="btn-text">Add</span>
             </button>
         </div>
