@@ -45,10 +45,15 @@ const Portfolio = () => {
 
     // Handle URL parameters to open specific images
     useEffect(() => {
+        const baseUrl = 'https://baity.netlify.app';
+
         if (imageId) {
-            const index = parseInt(imageId, 10)
+            const index = parseInt(imageId, 10);
             if (index >= 0 && index < showcaseImages.length) {
-                setSelectedImage(`/showcase/${showcaseImages[index]}`)
+                setSelectedImage(`/showcase/${showcaseImages[index]}`);
+                const imageUrl = `${baseUrl}/showcase/${showcaseImages[index]}`;
+                const pageUrl = `${baseUrl}/portfolio/image/${index}`;
+                updateMetaTags(imageUrl, pageUrl, `تصميم رائع ${index + 1} من بيتي`);
             }
         } else if (selectedImage) {
             const imageUrl = `${baseUrl}${selectedImage}`;
