@@ -308,6 +308,13 @@
     padding: var(--spacing-xl) 0 var(--spacing-2xl);
 }
 
+.before-after-container {
+    margin: 20px auto;
+    /* centers the container */
+    display: flex;
+    justify-content: center;
+}
+
 .modern-design-description {
     text-align: center;
     max-width: 800px;
@@ -394,7 +401,7 @@
 .before-after-container {
     width: 100%;
     max-width: 800px;
-    margin: 0 auto;
+    margin-bottom: 40px;
 }
 
 .before-after-wrapper {

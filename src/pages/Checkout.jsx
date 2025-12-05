@@ -17,7 +17,7 @@ const Checkout = ({ cart, clearCart }) => {
     })
 
     const [errors, setErrors] = useState({})
-    const [paymentMethod, setPaymentMethod] = useState('card') // 'card' or 'cash'
+    const [paymentMethod, setPaymentMethod] = useState('whatsapp') // Only WhatsApp payment enabled
     const [cardData, setCardData] = useState({
         cardNumber: '',
         cardName: '',
@@ -95,7 +95,7 @@ const Checkout = ({ cart, clearCart }) => {
                 const message = `
 مرحباً، أود إتمام طلبي:
 الاسم: ${formData.firstName} ${formData.lastName}
-رقم الهاتف: ${formData.phone}
+رقم الهاتف:\u200E+${formData.phone.replace('+', '')}
 
 الطلبات:
 ${itemsList}
@@ -229,8 +229,8 @@ ${itemsList}
                             <div className="form-section">
                                 <h2 className="section-title">دفع</h2>
 
-                                {/* Credit Card Option */}
-                                <div className="payment-option-wrapper">
+                                {/* Credit Card Option - DISABLED */}
+                                <div className="payment-option-wrapper" style={{ opacity: 0.5, pointerEvents: 'none' }}>
                                     <label className="payment-option-label">
                                         <input
                                             type="radio"
@@ -238,6 +238,7 @@ ${itemsList}
                                             value="card"
                                             checked={paymentMethod === 'card'}
                                             onChange={(e) => setPaymentMethod(e.target.value)}
+                                            disabled
                                         />
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flex: 1 }}>
                                             <span>بطاقة ائتمان</span>
@@ -304,8 +305,8 @@ ${itemsList}
                                     )}
                                 </div>
 
-                                {/* Cash on Delivery Option */}
-                                <div className="payment-option-wrapper">
+                                {/* Cash on Delivery Option - DISABLED */}
+                                <div className="payment-option-wrapper" style={{ opacity: 0.5, pointerEvents: 'none' }}>
                                     <label className="payment-option-label">
                                         <input
                                             type="radio"
@@ -313,6 +314,7 @@ ${itemsList}
                                             value="cash"
                                             checked={paymentMethod === 'cash'}
                                             onChange={(e) => setPaymentMethod(e.target.value)}
+                                            disabled
                                         />
                                         <span>الدفع عند الاستلام</span>
                                     </label>

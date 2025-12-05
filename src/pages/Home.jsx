@@ -13,66 +13,138 @@ const Home = () => {
     useEffect(() => {
         const sliderHandle = document.getElementById('sliderHandle')
         const afterImageContainer = document.getElementById('afterImageContainer')
+        const sliderHandle2 = document.getElementById('sliderHandle2')
+        const afterImageContainer2 = document.getElementById('afterImageContainer2')
 
-        if (!sliderHandle || !afterImageContainer) return
+        // First slider
+        if (sliderHandle && afterImageContainer) {
+            let isDragging = false
+            const container = sliderHandle.parentElement
 
-        let isDragging = false
-        const container = sliderHandle.parentElement
+            const updateSlider = (clientX) => {
+                const rect = container.getBoundingClientRect()
+                let position = ((clientX - rect.left) / rect.width) * 100
+                position = Math.max(0, Math.min(100, position))
 
-        const updateSlider = (clientX) => {
-            const rect = container.getBoundingClientRect()
-            let position = ((clientX - rect.left) / rect.width) * 100
-            position = Math.max(0, Math.min(100, position))
+                sliderHandle.style.left = `${position}%`
+                afterImageContainer.style.clipPath = `inset(0 ${100 - position}% 0 0)`
+            }
 
-            sliderHandle.style.left = `${position}%`
-            afterImageContainer.style.clipPath = `inset(0 ${100 - position}% 0 0)`
+            const handleMouseDown = (e) => {
+                isDragging = true
+                e.preventDefault()
+            }
+
+            const handleMouseMove = (e) => {
+                if (!isDragging) return
+                updateSlider(e.clientX)
+            }
+
+            const handleMouseUp = () => {
+                isDragging = false
+            }
+
+            const handleTouchStart = (e) => {
+                isDragging = true
+            }
+
+            const handleTouchMove = (e) => {
+                if (!isDragging) return
+                const touch = e.touches[0]
+                updateSlider(touch.clientX)
+            }
+
+            const handleTouchEnd = () => {
+                isDragging = false
+            }
+
+            // Mouse events
+            sliderHandle.addEventListener('mousedown', handleMouseDown)
+            document.addEventListener('mousemove', handleMouseMove)
+            document.addEventListener('mouseup', handleMouseUp)
+
+            // Touch events
+            sliderHandle.addEventListener('touchstart', handleTouchStart)
+            document.addEventListener('touchmove', handleTouchMove)
+            document.addEventListener('touchend', handleTouchEnd)
+
+            // Cleanup for first slider
+            var cleanup1 = () => {
+                sliderHandle.removeEventListener('mousedown', handleMouseDown)
+                document.removeEventListener('mousemove', handleMouseMove)
+                document.removeEventListener('mouseup', handleMouseUp)
+                sliderHandle.removeEventListener('touchstart', handleTouchStart)
+                document.removeEventListener('touchmove', handleTouchMove)
+                document.removeEventListener('touchend', handleTouchEnd)
+            }
         }
 
-        const handleMouseDown = (e) => {
-            isDragging = true
-            e.preventDefault()
+        // Second slider
+        if (sliderHandle2 && afterImageContainer2) {
+            let isDragging2 = false
+            const container2 = sliderHandle2.parentElement
+
+            const updateSlider2 = (clientX) => {
+                const rect = container2.getBoundingClientRect()
+                let position = ((clientX - rect.left) / rect.width) * 100
+                position = Math.max(0, Math.min(100, position))
+
+                sliderHandle2.style.left = `${position}%`
+                afterImageContainer2.style.clipPath = `inset(0 ${100 - position}% 0 0)`
+            }
+
+            const handleMouseDown2 = (e) => {
+                isDragging2 = true
+                e.preventDefault()
+            }
+
+            const handleMouseMove2 = (e) => {
+                if (!isDragging2) return
+                updateSlider2(e.clientX)
+            }
+
+            const handleMouseUp2 = () => {
+                isDragging2 = false
+            }
+
+            const handleTouchStart2 = (e) => {
+                isDragging2 = true
+            }
+
+            const handleTouchMove2 = (e) => {
+                if (!isDragging2) return
+                const touch = e.touches[0]
+                updateSlider2(touch.clientX)
+            }
+
+            const handleTouchEnd2 = () => {
+                isDragging2 = false
+            }
+
+            // Mouse events
+            sliderHandle2.addEventListener('mousedown', handleMouseDown2)
+            document.addEventListener('mousemove', handleMouseMove2)
+            document.addEventListener('mouseup', handleMouseUp2)
+
+            // Touch events
+            sliderHandle2.addEventListener('touchstart', handleTouchStart2)
+            document.addEventListener('touchmove', handleTouchMove2)
+            document.addEventListener('touchend', handleTouchEnd2)
+
+            // Cleanup for second slider
+            var cleanup2 = () => {
+                sliderHandle2.removeEventListener('mousedown', handleMouseDown2)
+                document.removeEventListener('mousemove', handleMouseMove2)
+                document.removeEventListener('mouseup', handleMouseUp2)
+                sliderHandle2.removeEventListener('touchstart', handleTouchStart2)
+                document.removeEventListener('touchmove', handleTouchMove2)
+                document.removeEventListener('touchend', handleTouchEnd2)
+            }
         }
-
-        const handleMouseMove = (e) => {
-            if (!isDragging) return
-            updateSlider(e.clientX)
-        }
-
-        const handleMouseUp = () => {
-            isDragging = false
-        }
-
-        const handleTouchStart = (e) => {
-            isDragging = true
-        }
-
-        const handleTouchMove = (e) => {
-            if (!isDragging) return
-            const touch = e.touches[0]
-            updateSlider(touch.clientX)
-        }
-
-        const handleTouchEnd = () => {
-            isDragging = false
-        }
-
-        // Mouse events
-        sliderHandle.addEventListener('mousedown', handleMouseDown)
-        document.addEventListener('mousemove', handleMouseMove)
-        document.addEventListener('mouseup', handleMouseUp)
-
-        // Touch events
-        sliderHandle.addEventListener('touchstart', handleTouchStart)
-        document.addEventListener('touchmove', handleTouchMove)
-        document.addEventListener('touchend', handleTouchEnd)
 
         return () => {
-            sliderHandle.removeEventListener('mousedown', handleMouseDown)
-            document.removeEventListener('mousemove', handleMouseMove)
-            document.removeEventListener('mouseup', handleMouseUp)
-            sliderHandle.removeEventListener('touchstart', handleTouchStart)
-            document.removeEventListener('touchmove', handleTouchMove)
-            document.removeEventListener('touchend', handleTouchEnd)
+            if (typeof cleanup1 !== 'undefined') cleanup1()
+            if (typeof cleanup2 !== 'undefined') cleanup2()
         }
     }, [])
 
@@ -250,7 +322,7 @@ const Home = () => {
                                 {/* Before Image */}
                                 <div className="before-image-container">
                                     <img
-                                        src="/showcase/site reality.jpg"
+                                        src="/showcase/design.jpg"
                                         alt="قبل - موقع البناء"
                                         className="comparison-image"
                                     />
@@ -260,7 +332,7 @@ const Home = () => {
                                 {/* After Image with Slider */}
                                 <div className="after-image-container" style={{ clipPath: 'inset(0 50% 0 0)' }} id="afterImageContainer">
                                     <img
-                                        src="/showcase/design.jpg"
+                                        src="/showcase/site reality.jpg"
                                         alt="بعد - التصميم النهائي"
                                         className="comparison-image"
                                     />
@@ -271,6 +343,46 @@ const Home = () => {
 
                                 {/* Slider Handle */}
                                 <div className="slider-handle" style={{ left: '50%' }} id="sliderHandle">
+                                    <div className="slider-line"></div>
+                                    <div className="slider-button">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                            <path d="M15 18l-6-6 6-6" />
+                                            <path d="M9 18l6-6-6-6" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        {/* Second Before-After Container */}
+                        <div className="before-after-container">
+                            <div className="before-after-wrapper">
+                                {/* Before Image */}
+                                <div className="before-image-container">
+                                    <img
+                                        src="/showcase/AFTER.jpg"
+                                        alt="قبل"
+                                        className="comparison-image"
+                                    />
+                                    <div className="image-label before-label">قبل</div>
+                                </div>
+
+                                {/* After Image with Slider */}
+                                <div className="after-image-container" style={{ clipPath: 'inset(0 50% 0 0)' }} id="afterImageContainer2">
+                                    <img
+                                        src="/showcase/BEFORE.jpg"
+                                        alt="بعد"
+                                        className="comparison-image"
+                                    />
+                                </div>
+
+                                {/* After Label - Outside clipped container */}
+                                <div className="image-label after-label" style={{ zIndex: 10 }}>بعد</div>
+
+                                {/* Slider Handle */}
+                                <div className="slider-handle" style={{ left: '50%' }} id="sliderHandle2">
                                     <div className="slider-line"></div>
                                     <div className="slider-button">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
