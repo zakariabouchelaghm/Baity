@@ -54,24 +54,88 @@ const Checkout = ({ cart, clearCart }) => {
         }
     }
 
+    const handleBlur = (e) => {
+        const { name, value } = e.target
+        const fieldErrors = {}
+
+        // Validate the specific field that lost focus
+        if (name === 'firstName') {
+            if (!value.trim()) {
+                fieldErrors.firstName = 'الاسم الأول مطلوب'
+            } else if (/\d/.test(value)) {
+                fieldErrors.firstName = 'الاسم لا يجب أن يحتوي على أرقام'
+            }
+        } else if (name === 'lastName') {
+            if (!value.trim()) {
+                fieldErrors.lastName = 'اسم العائلة مطلوب'
+            } else if (/\d/.test(value)) {
+                fieldErrors.lastName = 'اسم العائلة لا يجب أن يحتوي على أرقام'
+            }
+        } else if (name === 'phone') {
+            if (!value.trim()) {
+                fieldErrors.phone = 'رقم الهاتف مطلوب'
+            } else {
+                const cleanPhone = value.replace(/[\s\-()]/g, '')
+                if (!cleanPhone.startsWith('+971')) {
+                    fieldErrors.phone = 'رقم الهاتف يجب أن يبدأ بـ 971+'
+                } else if (cleanPhone.length !== 13) {
+                    fieldErrors.phone = 'رقم الهاتف يجب أن يحتوي على 9 أرقام بعد 971+'
+                } else if (!/^\+971[0-9]{9}$/.test(cleanPhone)) {
+                    fieldErrors.phone = 'رقم هاتف غير صحيح'
+                }
+            }
+        } else if (name === 'email') {
+            if (!value.trim()) {
+                fieldErrors.email = 'البريد الإلكتروني مطلوب'
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+                fieldErrors.email = 'صيغة البريد الإلكتروني غير صحيحة'
+            }
+        }
+
+        // Update errors for this field
+        setErrors(prev => ({
+            ...prev,
+            ...fieldErrors
+        }))
+    }
+
+
     const validateForm = () => {
         const newErrors = {}
 
         if (!formData.firstName.trim()) {
             newErrors.firstName = 'الاسم الأول مطلوب'
+        } else if (/\d/.test(formData.firstName)) {
+            newErrors.firstName = 'الاسم لا يجب أن يحتوي على أرقام'
         }
         if (!formData.lastName.trim()) {
             newErrors.lastName = 'اسم العائلة مطلوب'
+        } else if (/\d/.test(formData.lastName)) {
+            newErrors.lastName = 'اسم العائلة لا يجب أن يحتوي على أرقام'
         }
         if (!formData.phone.trim()) {
             newErrors.phone = 'رقم الهاتف مطلوب'
-        } else if (!/^[0-9+\s-()]+$/.test(formData.phone)) {
-            newErrors.phone = 'رقم هاتف غير صحيح'
+        } else {
+            // Remove all spaces, dashes, and parentheses for validation
+            const cleanPhone = formData.phone.replace(/[\s\-()]/g, '')
+
+            // Check if it starts with +971 (UAE country code)
+            if (!cleanPhone.startsWith('+971')) {
+                newErrors.phone = 'رقم الهاتف يجب أن يبدأ بـ 971+'
+            }
+            // Check if it has exactly 12 digits after the + (971 + 9 digits)
+            else if (cleanPhone.length !== 13) { // +971XXXXXXXXX = 13 characters
+                newErrors.phone = 'رقم الهاتف يجب أن يحتوي على 9 أرقام بعد 971+'
+            }
+            // Check if all characters after +971 are digits
+            else if (!/^\+971[0-9]{9}$/.test(cleanPhone)) {
+                newErrors.phone = 'رقم هاتف غير صحيح'
+            }
         }
         if (!formData.email.trim()) {
             newErrors.email = 'البريد الإلكتروني مطلوب'
         } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-            newErrors.email = 'البريد الإلكتروني غير صحيح'
+            newErrors.email = 'صيغة البريد الإلكتروني غير صحيحة'
         }
 
         setErrors(newErrors)
@@ -157,6 +221,7 @@ ${itemsList}
                                             name="firstName"
                                             value={formData.firstName}
                                             onChange={handleChange}
+                                            onBlur={handleBlur}
                                             className={errors.firstName ? 'error' : ''}
                                             placeholder="أدخل اسمك الأول"
                                         />
@@ -171,6 +236,7 @@ ${itemsList}
                                             name="lastName"
                                             value={formData.lastName}
                                             onChange={handleChange}
+                                            onBlur={handleBlur}
                                             className={errors.lastName ? 'error' : ''}
                                             placeholder="أدخل اسم العائلة"
                                         />
@@ -187,6 +253,7 @@ ${itemsList}
                                             name="phone"
                                             value={formData.phone}
                                             onChange={handleChange}
+                                            onBlur={handleBlur}
                                             className={errors.phone ? 'error' : ''}
                                             placeholder="+971 50 123 4567"
                                             dir="ltr"
@@ -202,6 +269,7 @@ ${itemsList}
                                             name="email"
                                             value={formData.email}
                                             onChange={handleChange}
+                                            onBlur={handleBlur}
                                             className={errors.email ? 'error' : ''}
                                             placeholder="example@email.com"
                                         />

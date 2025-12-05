@@ -73,8 +73,16 @@
 }
 
 .form-group input.error,
-.form-group select.error {
-    border-color: #e74c3c;
+.form-group select.error,
+.form-group textarea.error {
+    border-color: #e74c3c !important;
+}
+
+.form-group input.error:focus,
+.form-group select.error:focus,
+.form-group textarea.error:focus {
+    border-color: #e74c3c !important;
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1) !important;
 }
 
 .form-group input.readonly {
@@ -95,6 +103,49 @@
     margin-top: 0.5rem;
     font-weight: 500;
 }
+
+/* Error Summary Banner */
+.error-summary-banner {
+    background: #fee;
+    border: 2px solid #e74c3c;
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    margin-bottom: 2rem;
+    animation: slideDown 0.3s ease;
+}
+
+.error-summary-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #c0392b;
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin-bottom: 0.75rem;
+}
+
+.error-summary-header svg {
+    flex-shrink: 0;
+    color: #e74c3c;
+}
+
+.error-summary-list {
+    margin: 0;
+    padding-right: 2.5rem;
+    list-style: disc;
+    color: #c0392b;
+}
+
+.error-summary-list li {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.error-summary-list li:last-child {
+    margin-bottom: 0;
+}
+
 
 .form-actions {
     display: flex;
